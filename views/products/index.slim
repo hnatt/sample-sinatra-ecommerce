@@ -1,0 +1,27 @@
+h1 Welcome to ECommerce
+
+- @products.each do |product| 
+  .row.product
+    .medium-7.columns
+      h2 = product.name 
+
+    .medium-3.small-8.columns.text-right
+      span.price = "#{product.price.to_s('F')} USD"
+
+    .medium-2.small-4.columns
+      button Add to cart
+
+    .medium-12.columns
+      p = product.description
+
+- if @products.page_count > 1 
+  ul.pagination 
+    li class="arrow #{'unavailable' if @products.first_page?}"
+      a href="/?page=#{@products.current_page - 1}" &lt; Previous
+
+    - (1..@products.page_count).each do |page|
+      li class=('current' if page == @products.current_page) 
+        a href="?page=#{page}" = page
+
+    li class="arrow #{'unavailable' if @products.last_page?}"
+      a href="/?page=#{@products.current_page + 1}" Next &gt;

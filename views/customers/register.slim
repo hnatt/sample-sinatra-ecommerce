@@ -1,0 +1,22 @@
+h1 Register
+form action="/customers/register" method="post" 
+  - [[:firstname, 'First Name', 'text'],
+      [:lastname, 'Last Name', 'text'],
+      [:email, 'Email', 'text'],
+      [:password, 'Password', 'password']].each do |field|
+    .row
+      .large-4.large-centered.columns 
+        input type=field[2] name="customer[#{field[0]}]" placeholder=field[1] value=@customer.send(field[0]) class=('error' if @customer.errors[field[0]])
+        - if @customer.errors[field[0]] 
+          - @customer.errors[field[0]].each do |error|
+            small.error = "#{field[1]} #{error}"
+  .row
+    .large-4.large-centered.columns 
+      input type="password" name="password_confirmation" placeholder="Repeat password" value=params[:password_confirmation]
+        - if @customer.errors[:password_confirmation] 
+          - @customer.errors[:password_confirmation].each do |error|
+            small.error = "Password confirmation #{error}"
+  .row
+    .large-4.large-centered.columns.text-right
+      input.button type="submit" value="Register"
+

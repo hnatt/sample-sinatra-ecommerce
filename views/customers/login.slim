@@ -1,0 +1,8 @@
+h1 Sign in as a registered customer
+form action="/customers/login" method="post"
+  .large-4.columns 
+    input name="email" type="text" placeholder="Email" value=params[:email]
+  .large-4.columns 
+    input name="password" type="password" placeholder="Password" value=params[:password]
+  .large-4.columns 
+    input.button type="submit" value="Sign in"

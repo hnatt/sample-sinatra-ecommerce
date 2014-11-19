@@ -1,0 +1,3 @@
+development: mysql2://root:root@localhost/ecommerce
+test: mysql2://root:root@localhost/ecommerce_test
+production: mysql2://root:root@localhost/ecommerce
