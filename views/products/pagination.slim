@@ -1,0 +1,12 @@
+- if @products.page_count > 1 
+  ul.pagination 
+    li class="arrow #{'unavailable' if @products.first_page?}"
+      a href="/?page=#{@products.current_page - 1}" &lt; Previous
+
+    - (1..@products.page_count).each do |page|
+      li class=('current' if page == @products.current_page) 
+        a href="?page=#{page}" = page
+
+    li class="arrow #{'unavailable' if @products.last_page?}"
+      a href="/?page=#{@products.current_page + 1}" Next &gt;
+

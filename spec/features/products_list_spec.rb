@@ -43,9 +43,14 @@ feature 'products list' do
 
     scenario 'shows different batch no next page' do
       visit '/'
-      find('.pagination').find_link('2').click
+      first('.pagination').find_link('2').click
       expect(all('.product h2').map(&:text)).to \
         eq(products.slice(10, 10).map(&:name))
+    end
+
+    scenario 'shows 404 for non-existing pages' do
+      visit '/?page=999'
+      expect(page.status_code).to eq(404)
     end
   end
 end
