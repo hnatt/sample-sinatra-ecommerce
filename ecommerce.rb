@@ -4,6 +4,7 @@ require 'sinatra/flash'
 require 'slim'
 require 'sass'
 require_relative 'database'
+require './lib/shopping_cart'
 
 class Ecommerce < Sinatra::Base
   register Sinatra::AssetPack

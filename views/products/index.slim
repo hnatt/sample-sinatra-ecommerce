@@ -14,7 +14,9 @@ h1 Welcome to ECommerce
       span.price = "#{product.price.to_s('F')} USD"
 
     .medium-2.small-4.columns
-      button Add to cart
+      form action="/cart" method="post"
+        input type="hidden" name="product_id" value=product.id
+        button Add to cart
 
     .medium-12.columns
       p = product.description
