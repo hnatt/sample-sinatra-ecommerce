@@ -3,8 +3,8 @@ module Cart
     app.helpers Cart::Methods
 
     app.patch '/cart' do
-      checkout and return if params[:checkout]
       cart.items = params[:items]
+      checkout and return if params[:checkout]
       session[:cart] = cart.items
       update_session_cart
       flash[:success] = 'Your cart was updated'
@@ -56,6 +56,38 @@ module Cart
       flash[:success] = 'Item removed'
       redirect to('/cart')
     end
+
+    def checkout
+      return if checkout_failure
+      order = Order.create customer: current_customer
+      cart.items_table.each do |line|
+        order.add_order_line(OrderLine.new(product: line[:product],
+                                           qty: line[:qty]))
+      end
+      cart.clear
+      update_session_cart
+    end
+
+    def checkout_failure
+      return true if checkout_authorization_failure
+      return true if checkout_products_failure
+      false
+    end
+
+    def checkout_authorization_failure
+      return false if current_customer
+      flash[:error] = 'Sign in or register to checkout'
+      redirect to('/customers/login')
+      true
+    end
+
+    def checkout_products_failure
+      return false if cart.total_quantity > 0
+      flash[:error] = 'Your cart is empty'
+      redirect to('/')
+      true
+    end
+
   end
 end
 

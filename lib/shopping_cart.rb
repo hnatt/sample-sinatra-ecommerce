@@ -16,6 +16,11 @@ class ShoppingCart
     items.delete(product_id)
   end
 
+  def clear
+    flush
+    @items = {}
+  end
+
   def items=(new_items)
     flush
     @items = Hash[
