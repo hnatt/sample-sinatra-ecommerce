@@ -1,0 +1,21 @@
+h1 My orders
+
+- if @orders && !@orders.empty?
+  table.orders
+    thead 
+      tr 
+        th Order # 
+        th Date
+        th Items qty
+        th Order total
+    tbody
+      - @orders.each do |order|
+        tr 
+          td
+            h5
+              a href="/orders/#{order.order_no}" = order.order_no 
+          td = order.date
+          td = order.order_lines.map(&:qty).reduce(0, :+)
+          td = money(order.total)
+- else 
+  p You have no orders
