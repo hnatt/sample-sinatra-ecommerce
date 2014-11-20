@@ -1,0 +1,28 @@
+h1 Order ##{@order.order_no}
+
+table.order-items
+  colgroup 
+    col style="width: 10%;"
+    col 
+    col style="width: 10%;"
+    col style="width: 10%;"
+    col style="width: 10%;"
+  thead 
+    tr 
+      th # 
+      th Item 
+      th Price 
+      th Qty 
+      th Total
+  tbody 
+    - @order.order_lines.each_with_index do |line, i|
+      tr 
+        td = i + 1
+        td = line.product.name
+        td = money(line.unit_price)
+        td = line.qty 
+        td = money(line.total_price)
+
+.large-12.text-right.total-row
+  span.total = "Total: #{money(@order.total)}"
+

@@ -78,8 +78,8 @@ feature 'cart' do
         find('.cart').click
         expect(page).to have_selector('button[name=checkout]')
         expect { click_button 'Checkout' }.to change(Order, :count)
-        #expect(page).to have_content('Thank you for your order!')
-        #expect(page).to have_content('Total: $10.00')
+        expect(page).to have_content('Thank you for your order!')
+        expect(page).to have_content('Total: $19.00')
         visit '/'
         expect(find('.cart')).to have_content('Cart (empty)')
       end

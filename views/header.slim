@@ -10,7 +10,7 @@ nav.top-bar[data-topbar role="navigation"]
     ul.right
       - if current_customer
         li 
-          a href="/customers/me" = current_customer.full_name
+          a href="/customers/me" Hello, #{current_customer.full_name}
         li 
           form action="/customers/logout" method="post"
             input.alert.button type="submit" value="Sign out"
