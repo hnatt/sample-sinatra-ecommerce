@@ -10,6 +10,21 @@
   font-weight: bold;
 }
 
+.cart-items {
+  button.remove {
+    padding: 0.5em 1em;
+  }
+}
+
+.total-row {
+  margin-bottom: 1em;
+  
+  span.total {
+    font-size: 2em;
+    font-weight: bold;
+  }
+}
+
 // Or selectively include components
 // @import
 //   "foundation/components/accordion",

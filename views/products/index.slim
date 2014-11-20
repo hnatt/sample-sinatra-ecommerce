@@ -11,7 +11,7 @@ h1 Welcome to ECommerce
       h2 = product.name 
 
     .medium-3.small-8.columns.text-right
-      span.price = "#{product.price.to_s('F')} USD"
+      span.price = money(product.price)
 
     .medium-2.small-4.columns
       form action="/cart" method="post"

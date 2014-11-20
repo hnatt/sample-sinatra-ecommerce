@@ -1,0 +1,46 @@
+h1 Shopping cart 
+
+- if cart.items.empty? 
+  p Your shopping cart is empty. Why not <a href="/">put something in it</a>?
+- else 
+  - cart.items.keys.each do |product_id| 
+    form action="/cart/items/#{product_id}" method="post" id="delete_form_#{product_id}"
+      input type="hidden" name="_method" value="delete"
+  form action="/cart" method="post"
+    input type="hidden" name="_method" value="patch"
+    table.cart-items
+      colgroup 
+        col span=2
+        col style="width: 10%;"
+        col style="width: 10%;"
+        col style="width: 5%;"
+      thead
+        th Item 
+        th Price 
+        th Qty
+        th Total
+        th 
+      tbody
+        - cart.items_table.each do |row| 
+          tr id="line_#{row[:product].id}"
+            td.product
+              h5 = row[:product].name 
+              p = row[:product].description 
+            td.price = money(row[:product].price) 
+            td.qty
+              input type="number" min="1" value=row[:qty] name="items[#{row[:product].id}]"
+            td.total = money(row[:total])
+            td.actions
+              button.remove.alert form="delete_form_#{row[:product].id}" x
+
+    .large-12.text-right.total-row
+      span.total = "Total: #{money(cart.total_price)}"
+
+    .large-12.text-right
+      button name="update" Update cart
+      | &nbsp;
+      - if current_customer 
+        button.success name="checkout" Checkout
+      - else 
+        a.success.button href="/customers/login" Sign in to checkout
+

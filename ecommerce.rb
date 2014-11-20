@@ -10,6 +10,7 @@ class Ecommerce < Sinatra::Base
   register Sinatra::AssetPack
   register Sinatra::Flash
   enable :sessions
+  enable :method_override
 
   assets do
     serve '/js', from: 'assets/js'
