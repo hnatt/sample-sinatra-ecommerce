@@ -7,7 +7,7 @@ gem 'mysql2', '~> 0.3.17'
 gem 'validates_email_format_of'
 gem 'bcrypt'
 gem 'sinatra-assetpack'
-gem 'sass', '~> 3.4.0'
+gem 'sass', '~> 3.3.0'
 gem 'compass', '~> 1.0'
 gem 'foundation'
 
