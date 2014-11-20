@@ -33,5 +33,11 @@ class Ecommerce < Sinatra::Base
 
   Dir['./routes/**/*.rb'].each { |f| require f }
 
+  Dir['./helpers/*.rb'].each do |f|
+    require f
+    helper_name = File.basename(f, '.*').split('_').map(&:capitalize).join
+    helpers Module.const_get("#{helper_name}Helper")
+  end
+
   run! if app_file == $0
 end

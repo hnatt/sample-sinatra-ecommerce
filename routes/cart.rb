@@ -41,11 +41,6 @@ module Cart
       "Cart (#{cart.total_quantity}): #{money(cart.total_price)}"
     end
 
-    # Formats BigDecimal as money
-    def money(amount)
-      BigDecimal.new(amount).to_s('F') + ' USD'
-    end
-
     def update_session_cart
       session[:cart] = cart.items
     end

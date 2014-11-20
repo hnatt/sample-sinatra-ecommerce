@@ -26,27 +26,27 @@ feature 'cart' do
   scenario 'adds product to cart' do
     add_product_to_cart(:austen)
     expect(page).to have_content('Pride and Prejudice was added to cart')
-    expect(page).to have_link('Cart (1): 9.99 USD')
+    expect(page).to have_link('Cart (1): $9.99')
   end
 
   scenario 'adds several products to cart across session' do
     [:austen, :austen, :stein, :orwell].each(&method(:add_product_to_cart))
-    expect(page).to have_link('Cart (4): 49.82 USD')
+    expect(page).to have_link('Cart (4): $49.82')
   end
 
   scenario 'updates cart' do
     [:stein, :orwell, :fitz].each(&method(:add_product_to_cart))
     find('.cart').click
-    expect(page).to have_content('Total: 58.84 USD')
+    expect(page).to have_content('Total: $58.84')
     fill_in("items[#{@products[:stein].id}]", with: '2')
     click_button('Update cart')
     expect(page).to have_content('Your cart was updated')
-    expect(page).to have_content('Total: 68.84 USD')
-    expect(find("#line_#{@products[:stein].id} .total")).to have_text('20.0 USD')
+    expect(page).to have_content('Total: $68.84')
+    expect(find("#line_#{@products[:stein].id} .total")).to have_text('$20.00')
     expect(page).to have_selector("input[name='items[#{@products[:stein].id}]'][value='2']")
     find("#line_#{@products[:stein].id} .remove").click
     expect(page).to have_content('Item removed')
-    expect(page).to have_content('Total: 48.84 USD')
+    expect(page).to have_content('Total: $48.84')
     expect(page).not_to have_css("#line_#{@products[:stein].id}")
   end
 
@@ -79,6 +79,7 @@ feature 'cart' do
         expect(page).to have_selector('button[name=checkout]')
         expect { click_button 'Checkout' }.to change(Order, :count)
         #expect(page).to have_content('Thank you for your order!')
+        #expect(page).to have_content('Total: $10.00')
         visit '/'
         expect(find('.cart')).to have_content('Cart (empty)')
       end
