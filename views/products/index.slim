@@ -9,6 +9,7 @@ h1 Welcome to ECommerce
   .row.product
     .medium-7.columns
       h2 = product.name 
+      a.edit href="/products/#{product.id}/edit" Edit
 
     .medium-3.small-8.columns.text-right
       span.price = money(product.price)

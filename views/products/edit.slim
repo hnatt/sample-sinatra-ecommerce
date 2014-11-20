@@ -1,0 +1,10 @@
+h1 Editing #{@product.name} 
+
+form action="/products/#{@product.id}" method="post" 
+  input type="hidden" name="_method" value="patch" 
+
+  == slim :'products/form'
+  
+  .row
+    .large-6.columns.text-right
+      input.button type="submit" value="Update"

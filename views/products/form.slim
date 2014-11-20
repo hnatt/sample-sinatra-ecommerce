@@ -1,0 +1,34 @@
+.row
+  .large-6.columns 
+    label 
+      | Name
+      input type="text" name="product[name]" value=@product.name class=('error' if @product.errors[:name])
+      - if @product.errors[:name] 
+        - @product.errors[:name].each do |error|
+          small.error = "Name #{error}"
+.row
+  .large-6.columns 
+    label 
+      | Price
+      input type="text" name="product[price]" value=(money(@product.price, false) if @product.price) class=('error' if @product.errors[:price])
+      - if @product.errors[:price] 
+        - @product.errors[:price].each do |error|
+          small.error = "Price #{error}"
+.row
+  .large-6.columns 
+    label 
+      | Status
+      select name="product[status]" 
+        option value=0 selected=('selected' if @product.status == 0) Disabled
+        option value=1 selected=('selected' if @product.status == 1) Enabled
+      - if @product.errors[:status] 
+        - @product.errors[:status].each do |error|
+          small.error = "Status #{error}"
+.row
+  .large-6.columns 
+    label 
+      | Description
+      textarea name="product[description]" class=('error' if @product.errors[:description]) = @product.description
+      - if @product.errors[:description] 
+        - @product.errors[:description].each do |error|
+          small.error = "Description #{error}"
