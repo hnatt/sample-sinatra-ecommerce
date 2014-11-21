@@ -3,8 +3,7 @@ html.no-js
   head
     meta[charset="utf-8"]
     meta[name="viewport" content="width=device-width, initial-scale=1.0"]
-    title
-      | ECommerce
+    title = yield_content :title
     link[rel="stylesheet" href="/stylesheets/app.css"]
     == js :modernizr
   body

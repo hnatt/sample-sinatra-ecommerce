@@ -1,4 +1,5 @@
-h1 Welcome to ECommerce
+- content_for :title do 'Welcome to ECommerce' end
+h1 = yield_content :title
 
 .row 
   a.button href="/products/new" New product

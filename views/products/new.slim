@@ -1,4 +1,5 @@
-h1 New product
+- content_for :title do 'New product' end
+h1 = yield_content :title
 
 form action="/products" method="post" 
 

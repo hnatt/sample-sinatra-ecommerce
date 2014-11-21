@@ -1,1 +1,2 @@
-h1 Error: #{message}
+- content_for :title do "Error: #{message}" end
+h1 = yield_content :title

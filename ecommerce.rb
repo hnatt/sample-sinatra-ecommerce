@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/assetpack'
 require 'sinatra/flash'
+require 'sinatra/content_for'
 require 'slim'
 require 'sass'
 require_relative 'database'
@@ -9,6 +10,7 @@ require './lib/shopping_cart'
 class Ecommerce < Sinatra::Base
   register Sinatra::AssetPack
   register Sinatra::Flash
+  helpers Sinatra::ContentFor
   enable :sessions
   enable :method_override
 

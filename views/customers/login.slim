@@ -1,4 +1,6 @@
-h1 Sign in as a registered customer
+- content_for :title do 'Sign in as a registered customer' end
+h1 = yield_content :title
+
 form action="/customers/login" method="post"
   .large-4.columns 
     input name="email" type="text" placeholder="Email" value=params[:email]
