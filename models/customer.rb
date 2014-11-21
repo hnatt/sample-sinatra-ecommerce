@@ -5,7 +5,7 @@ require 'securerandom'
 class Customer < Sequel::Model
   plugin :validation_helpers
   def validate
-    validates_presence [:firstname, :lastname, :email, :password]
+    validates_presence [:first_name, :last_name, :email, :password]
     validates_min_length 7, :password
     validates_unique :email
     email_errors = ValidatesEmailFormatOf::validate_email_format(email)
@@ -23,6 +23,6 @@ class Customer < Sequel::Model
   end
 
   def full_name
-    firstname + ' ' + lastname
+    first_name + ' ' + last_name
   end
 end

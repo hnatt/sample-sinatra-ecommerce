@@ -1,7 +1,7 @@
 h1 Register
 form action="/customers/register" method="post" 
-  - [[:firstname, 'First Name', 'text'],
-      [:lastname, 'Last Name', 'text'],
+  - [[:first_name, 'First Name', 'text'],
+      [:last_name, 'Last Name', 'text'],
       [:email, 'Email', 'text'],
       [:password, 'Password', 'password']].each do |field|
     .row

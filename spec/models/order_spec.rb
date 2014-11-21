@@ -11,7 +11,7 @@ describe Order do
 
   context 'persists' do
     def customer
-      Customer.create firstname: 'John', lastname: 'Doe',
+      Customer.create first_name: 'John', last_name: 'Doe',
                       email: 'jdoe@example.com', password: 'secret!!!'
     end
     def sinatra_book
@@ -34,7 +34,7 @@ describe Order do
     before(:all) { order }
 
     it 'generates number' do
-      expect(order.order_no).to match(/^[A-Z][0-9]+$/)
+      expect(order.number).to match(/^[A-Z][0-9]+$/)
     end
 
     it 'saves current date' do

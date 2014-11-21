@@ -14,15 +14,15 @@ end
 
 DB.create_table?(:customers) do
   primary_key :id
-  String      :firstname
-  String      :lastname
+  String      :first_name
+  String      :last_name
   String      :email
   String      :password
 end
 
 DB.create_table?(:orders) do
   primary_key :id
-  String      :order_no
+  String      :number
   foreign_key :customer_id, :customers
   BigDecimal  :total, size: [16, 2]
   Date        :date

@@ -1,6 +1,6 @@
 namespace :db do 
   SAMPLE = {
-    customer: { firstname: 'Bob', lastname: 'Ross',
+    customer: { first_name: 'Bob', last_name: 'Ross',
                 email: 'bross@example.com',
                 password: 'happyaccidents' },
     products: {
@@ -52,7 +52,7 @@ namespace :db do
         order.add_order_line OrderLine.new product: products[key],
                                            qty: qty
       end
-      puts "Sample order created: #{order.order_no}"
+      puts "Sample order created: #{order.number}"
       order
     end
   end

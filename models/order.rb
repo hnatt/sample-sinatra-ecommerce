@@ -13,12 +13,12 @@ class Order < Sequel::Model
     number = loop do
       random = ORDER_NUMBER_PREFIX +
         (0...10).map { Random.rand(10) }.join
-      break random if self.class.where(order_no: random).count == 0
+      break random if self.class.where(number: random).count == 0
     end
   end
 
   def before_create
-    self.order_no = generate_order_number
+    self.number = generate_order_number
     self.date = Time.now
   end
 

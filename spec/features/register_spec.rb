@@ -5,8 +5,8 @@ feature 'register' do
   end
 
   it 'registers a new customer' do
-    fill_in 'customer[firstname]',   with: 'Bart'
-    fill_in 'customer[lastname]',    with: 'Simpson'
+    fill_in 'customer[first_name]',  with: 'Bart'
+    fill_in 'customer[last_name]',   with: 'Simpson'
     fill_in 'customer[email]',       with: 'bsimpson@yahoo.com'
     fill_in 'customer[password]',    with: 'bitemyshorts'
     fill_in 'password_confirmation', with: 'bitemyshorts'
@@ -40,7 +40,7 @@ feature 'register' do
 
     context 'email uniqueness' do
       before do
-        Customer.create firstname: 'Tom', lastname: 'Sawyer',
+        Customer.create first_name: 'Tom', last_name: 'Sawyer',
                         email: 'tsawyer@aol.com', password: 'deadcat'
       end
       subject do
@@ -53,8 +53,8 @@ feature 'register' do
 
     context 'password confirmation' do
       subject do
-        fill_in 'customer[firstname]',   with: 'Nicholas'
-        fill_in 'customer[lastname]',    with: 'Cage'
+        fill_in 'customer[first_name]',   with: 'Nicholas'
+        fill_in 'customer[last_name]',    with: 'Cage'
         fill_in 'customer[email]',       with: 'ncage@yahoo.com'
         fill_in 'customer[password]',    with: 'secret!'
         fill_in 'password_confirmation', with: 'secret'

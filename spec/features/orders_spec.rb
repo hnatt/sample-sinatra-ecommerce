@@ -17,12 +17,12 @@ feature 'orders' do
   before { [:order_lines, :orders, :customers].each { |tbl| DB[tbl].delete } }
 
   let(:customer) do
-    Customer.create firstname: 'Bosco', lastname: 'Baracus',
+    Customer.create first_name: 'Bosco', last_name: 'Baracus',
                     email: 'mrt@a-team.com', password: 'ipitythefool'
   end
 
   let(:other_customer) do
-    Customer.create firstname: 'John', lastname: 'Smith',
+    Customer.create first_name: 'John', last_name: 'Smith',
                     email: 'hannibal@a-team.com', password: 'cigars!'
   end
 
@@ -41,7 +41,7 @@ feature 'orders' do
   end
 
   scenario 'guest user cannot see an order' do
-    visit "/orders/#{order.order_no}"
+    visit "/orders/#{order.number}"
     expect(page.status_code).to eq(401)
     expect(page).to have_content('You are unauthorized to see this page')
   end
@@ -59,8 +59,8 @@ feature 'orders' do
     end
 
     scenario 'can see his order' do
-      visit "/orders/#{order.order_no}"
-      expect(page).to have_content(order.order_no)
+      visit "/orders/#{order.number}"
+      expect(page).to have_content(order.number)
       expect(page).to have_content('Total: $38.98')
     end
 
@@ -71,7 +71,7 @@ feature 'orders' do
     end
 
     scenario 'unauthorized to see other customers\'s order' do
-      visit "/orders/#{other_order.order_no}"
+      visit "/orders/#{other_order.number}"
       expect(page.status_code).to be(401)
       expect(page).to have_content('You are unauthorized to see this page')
     end
@@ -97,21 +97,21 @@ feature 'orders' do
         order; older_order; newer_order
         click_link 'Hello, Bosco Baracus'
         expect(all('.orders a').map(&:text)).to \
-          eq ([newer_order, order, older_order].map(&:order_no))
+          eq ([newer_order, order, older_order].map(&:number))
       end
 
       scenario 'does not show other customers\' orders' do
         order; other_order
         click_link 'Hello, Bosco Baracus'
-        expect(all('.orders a').map(&:text)).to eq([order.order_no])
-        expect(page).not_to have_content(other_order.order_no)
+        expect(all('.orders a').map(&:text)).to eq([order.number])
+        expect(page).not_to have_content(other_order.number)
       end
 
       scenario 'allows to open order by link' do
         order
         click_link 'Hello, Bosco Baracus'
-        click_link order.order_no
-        expect(current_path).to eq("/orders/#{order.order_no}")
+        click_link order.number
+        expect(current_path).to eq("/orders/#{order.number}")
       end
     end
   end

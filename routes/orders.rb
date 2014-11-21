@@ -3,7 +3,7 @@ module Orders
     app.helpers Orders::Methods
 
     app.get '/orders/:number' do
-      @order = Order.find(order_no: params[:number])
+      @order = Order.find(number: params[:number])
       return if order_not_found(@order)
       return if order_unauthorized(@order)
       slim :'orders/show'

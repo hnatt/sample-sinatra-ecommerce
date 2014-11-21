@@ -4,7 +4,7 @@ describe Customer do
       let(:customer) { Customer.new }
       it do
         expect(customer.valid?).to be(false)
-        expect(customer.errors.keys).to contain_exactly(:firstname, :lastname,
+        expect(customer.errors.keys).to contain_exactly(:first_name, :last_name,
                                                         :email, :password)
       end
     end
@@ -20,14 +20,14 @@ describe Customer do
 
       context 'uniqueness' do
         let!(:spongebob) do
-          Customer.create firstname: 'Bob',
-                          lastname: 'Squarepants',
+          Customer.create first_name: 'Bob',
+                          last_name: 'Squarepants',
                           email: 'bob@example.com',
                           password: 'shellfish'
         end
         let(:bobross) do
-          Customer.new firstname: 'Bob',
-                       lastname: 'Ross',
+          Customer.new first_name: 'Bob',
+                       last_name: 'Ross',
                        email: 'bob@example.com',
                        password: 'happyacc1dents'
         end
@@ -49,8 +49,8 @@ describe Customer do
 
   context 'persists' do
     let(:customer) do
-      Customer.new firstname: 'Snorri',
-                   lastname: 'Sturluson',
+      Customer.new first_name: 'Snorri',
+                   last_name: 'Sturluson',
                    email: 'ssturluson@althing.gov.is',
                    password: 'futhark!#1179$'
     end
@@ -63,14 +63,14 @@ describe Customer do
 
   context 'password' do
     def john
-      @john ||= Customer.create firstname: 'John',
-                                lastname: 'Doe',
+      @john ||= Customer.create first_name: 'John',
+                                last_name: 'Doe',
                                 email: 'john@doe-family.com',
                                 password: 'pirates!'
     end
     def jane
-      @jane ||= Customer.create firstname: 'Jane',
-                                lastname: 'Doe',
+      @jane ||= Customer.create first_name: 'Jane',
+                                last_name: 'Doe',
                                 email: 'jane@doe-family.com',
                                 password: 'pirates!'
     end
@@ -95,7 +95,7 @@ describe Customer do
 
     it 'is not changed on record update' do
       old_value = john.password
-      john.update(firstname: 'Johnny')
+      john.update(first_name: 'Johnny')
       expect(john.password).to eq(old_value)
     end
   end

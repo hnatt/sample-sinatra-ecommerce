@@ -13,7 +13,7 @@ h1 My orders
         tr 
           td
             h5
-              a href="/orders/#{order.order_no}" = order.order_no 
+              a href="/orders/#{order.number}" = order.number 
           td = order.date
           td = order.order_lines.map(&:qty).reduce(0, :+)
           td = money(order.total)

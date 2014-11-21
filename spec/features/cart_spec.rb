@@ -59,7 +59,7 @@ feature 'cart' do
 
     context 'registered customer' do
       let(:customer) do
-        Customer.create firstname: 'Moby', lastname: 'Dick',
+        Customer.create first_name: 'Moby', last_name: 'Dick',
                         email: 'mdick@oce.an', password: 'ammamammal'
       end
 

@@ -62,7 +62,7 @@ module Cart
       cart.clear
       update_session_cart
       flash[:success] = 'Thank you for your order!'
-      redirect to("/orders/#{order.order_no}")
+      redirect to("/orders/#{order.number}")
     end
 
     def checkout_failure

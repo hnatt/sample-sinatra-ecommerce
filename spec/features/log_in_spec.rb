@@ -5,8 +5,8 @@ feature 'log in' do
     end
 
     let!(:customer) do
-      Customer.create firstname: 'John',
-                      lastname: 'Connor',
+      Customer.create first_name: 'John',
+                      last_name: 'Connor',
                       email: 'jconnor@aol.com',
                       password: 'bananas'
     end
