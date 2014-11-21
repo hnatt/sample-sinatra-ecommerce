@@ -13,6 +13,7 @@ module Cart
 
     app.post '/cart' do
       product = Product.find(id: params[:product_id])
+      return if product_disabled(product)
       cart.add(product.id)
       session[:cart] = cart.items
       update_session_cart
@@ -85,6 +86,12 @@ module Cart
       true
     end
 
+    def product_disabled(product)
+      return false if product.status == 1
+      flash[:error] = "Product #{product.name} is disabled"
+      redirect back
+      true
+    end
   end
 end
 

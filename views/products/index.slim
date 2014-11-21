@@ -21,7 +21,7 @@ h1 = yield_content :title
     .medium-2.small-4.columns
       form action="/cart" method="post"
         input type="hidden" name="product_id" value=product.id
-        button Add to cart
+        button disabled=('disabled' if product.status == 0) Add to cart
 
     .medium-12.columns
       p = product.description

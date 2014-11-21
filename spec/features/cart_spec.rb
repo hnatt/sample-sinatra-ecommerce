@@ -7,10 +7,11 @@ feature 'cart' do
         fitz:   ['The Great Gatsby',      29.00, 'F. Scott Fitzgerald\'s classic'],
         orwell: ['1984',                  19.84, 'George Orwell\'s classic'],
         stein:  ['Of Mice and Men',       10.00, 'John Steinbeck\'s classic'],
+        meyer:  ['Twilight',              20.00, 'Approved by teenage girls', true],
       }.map do |key, attrs|
         [
           key,
-          Product.create(name: attrs[0], price: attrs[1], status: 1,
+          Product.create(name: attrs[0], price: attrs[1], status: attrs[3] ? 0 : 1,
                          description: attrs[2])
         ]
       end]
@@ -48,6 +49,17 @@ feature 'cart' do
     expect(page).to have_content('Item removed')
     expect(page).to have_content('Total: $48.84')
     expect(page).not_to have_css("#line_#{@products[:stein].id}")
+  end
+
+  scenario 'add to cart button is greyed out for disabled profucts' do
+    expect(find('h2', text: @products[:meyer].name).first(:xpath, '../..'))
+      .not_to have_button('Add to cart')
+  end
+
+  scenario 'cannot add disabled product to cart' do
+    @products[:stein].update(status: 0)
+    add_product_to_cart(:stein)
+    expect(page).to have_content('Cart (empty)')
   end
 
   context 'checkout' do
