@@ -1,5 +1,8 @@
 h1 Welcome to ECommerce
 
+.row 
+  a.button href="/products/new" New product
+
 == slim :'products/pagination'
 
 - if @products.current_page_record_count == 0

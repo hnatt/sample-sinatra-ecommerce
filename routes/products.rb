@@ -14,7 +14,7 @@ module Products
 
     app.patch '/products/:id' do
       @product = Product.find(id: params[:id])
-      @product.set_only(params[:product], :name, :price, :status, :description)
+      product_assign_from_params(@product)
       return if product_not_found(@product)
       return if product_invalid(@product)
       @product.save
@@ -27,9 +27,28 @@ module Products
       return if product_not_found(@product)
       slim :'products/edit'
     end
+
+    app.get '/products/new' do
+      @product = Product.new
+      slim :'products/new'
+    end
+
+    app.post '/products' do
+      @product = Product.new
+      product_assign_from_params(@product)
+      return if product_invalid(@product)
+      @product.save
+      flash[:success] = "Product #{@product.name} created"
+      redirect to('/')
+    end
   end
 
   module Methods
+    def product_assign_from_params(product)
+      params[:product] && params[:product][:price] = params[:product][:price].gsub(',', '')
+      product.set_only(params[:product], :name, :price, :status, :description)
+    end
+
     def product_not_found(product)
       return false if product
       render_error(404, 'Product not found')

@@ -7,7 +7,7 @@ DB = Sequel.connect(YAML.load_file('database.yml')[ENV['RACK_ENV']])
 DB.create_table?(:products) do
   primary_key :id
   String      :name
-  BigDecimal  :price, size: [8, 2]
+  BigDecimal  :price, size: [16, 2]
   Int         :status, default: 1
   Text        :description
 end
@@ -24,7 +24,7 @@ DB.create_table?(:orders) do
   primary_key :id
   String      :order_no
   foreign_key :customer_id, :customers
-  BigDecimal  :total, size: [8, 2]
+  BigDecimal  :total, size: [16, 2]
   Date        :date
 end
 
@@ -33,8 +33,8 @@ DB.create_table?(:order_lines) do
   foreign_key :order_id, :orders
   foreign_key :product_id, :products
   Integer     :qty
-  Decimal     :unit_price, size: [8, 2]
-  Decimal     :total_price, size: [8, 2]
+  Decimal     :unit_price, size: [16, 2]
+  Decimal     :total_price, size: [16, 2]
 end
 
 Dir.glob('./models/**/*.rb').each { |f| require f }
